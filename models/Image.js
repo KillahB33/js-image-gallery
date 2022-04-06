@@ -1,14 +1,13 @@
-const mongoose = require("mongoose");
-const { Schema } = mongoose;
-
-const imagesSchema = new Schema({
-  title: String,
-  description: String,
-  painted_at: String,
-  technique: String,
-  path_to_file: String
+//scan directory for images and create json file with paths to images
+const fs = require('fs');
+const dir = './public/images/';
+const Images = fs.readdirSync(dir).forEach(file => {
+  fs.readFile(path.join(dir, file), (err, data) => {
+    if (err) throw err;
+    fs.writeFile(path.join(dir, file), data, (err) => {
+      if (err) throw err;
+    });
+  });
 });
 
-const Image = new mongoose.model("Image", imagesSchema);
-
-module.exports = Image;
+module.exports = Images;
